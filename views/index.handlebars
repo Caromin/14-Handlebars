@@ -23,7 +23,7 @@
           {{#unless this.devoured}}
           <div class='row'>
             <div class='col-6' style='text-align: left;'>
-              {{this.id}}. {{this.burger_name}}</pre>
+              <input class="form-control" type="text" placeholder="{{ plusOne @index}} . {{this.burger_name}}" readonly>
             </div>
             <div class='col-3'> 
                 <form method='POST' action='/update?_method=PUT'>
@@ -33,7 +33,7 @@
             </div>
             <div class='col-3'> 
                 <form method='POST' action='/update?_method=DELETE'>
-                  <input input type="hidden" type="text" name="burger_id" value={{this.id}}>
+                  <input input type="hidden" type="text" name="burger_id" value={{this.id}} >
                 <button type="submit" id='{{this.id}}' class=" test btn btn-default">Delete</button>
               </form>
             </div>
@@ -48,7 +48,15 @@
         {{#each burger_data}}
         {{!-- if = if it returns false, undefined, null, '', 0 , [], it will not render/run --}}
           {{#if this.devoured}}
-            <input class="form-control" type="text" placeholder="{{this.id}} . {{this.burger_name}}" readonly>
+            <div class='col-9'>
+            <input class="form-control" type="text" placeholder="{{ plusOne @index}} . {{this.burger_name}}" readonly>
+            </div>
+            <div class='col-3'> 
+                <form method='POST' action='/update?_method=DELETE'>
+                  <input input type="hidden" type="text" name="burger_id" value={{this.id}}>
+                <button type="submit" id='{{this.id}}' class=" test btn btn-default">Delete</button>
+              </form>
+            </div>  
           {{/if}}
         {{/each}}
     </div>
@@ -89,5 +97,9 @@
   }
   .col-3 {
     padding: 0;
+    padding-top: 5px;
+  }
+  .col-6, .col-9 {
+    padding-top: 5px;
   }
 </style>

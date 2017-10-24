@@ -29,7 +29,11 @@ var burger = {
   updateOne: function(burgerId, cb) {
     orm.updateOne('burgers', burgerId, true, cb
     )
-  
+  },
+
+  deleteOne: function(burgerId, cb) {
+    orm.deleteOne('burgers', burgerId, cb
+    )
   },
 
 };  

@@ -20,14 +20,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // <form method="POST" action="/resource?_method=DELETE">
 //   <button type="submit">Delete resource</button>
 // </form>
+//so instead of a router.post the route will be looking for router.delete
 app.use(methodOverride("_method"));
 
 //Handlebars npm to be able to use handlebars with express package
 var exphbs = require("express-handlebars");
 
-// first parameter is using handlebars and then passing the defaultLayout as main.handbars
-// this is the main wrapper for the html
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+//this is needed if you are using helper functions
+var hbs = exphbs.create({
+   // Specify helpers which are only registered on this instance.
+   helpers: {
+    	plusOne: function(val) {
+			return parseInt(val) + 1;
+		},
+	},
+	//sets the default layout to main.handlebars
+	defaultLayout: 'main',
+});
+
+//hbs.engine would be used if you have custom helpers/other settings
+app.engine("handlebars", hbs.engine);
 //.set is saying now use the engine with parameters handlebars and run that as the viewing engine
 app.set("view engine", "handlebars");
 

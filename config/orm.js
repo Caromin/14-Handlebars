@@ -61,6 +61,18 @@ var orm = {
     });
   },
 
+  deleteOne: function(table, burgerId, cb) {
+    var queryString = 'DELETE FROM ' + table + ' WHERE id=' + burgerId;
+    console.log(queryString);
+
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });  
+  },
+
 };
 
 // exports the variable orm only

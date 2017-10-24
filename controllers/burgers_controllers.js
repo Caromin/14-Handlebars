@@ -33,6 +33,11 @@ router.put('/update', function(req, res) {
   });
 });
 
+router.delete('/update', function(req, res) {
+  burger.deleteOne(req.body.burger_id, function(result) {
+    res.redirect('/');
+  });
+});
 
 
 module.exports = router;
