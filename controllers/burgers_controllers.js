@@ -4,30 +4,26 @@ var express = require('express');
 var router = express.Router();
 var burger = require('../models/burger.js');
 
+//when I say burger, I am saying go to burger.selectAll inside of burger.js
 router.get("/", function(req, res) {
-  burger.selectAll(function(burgerData) {
+  burger.selectAll(function(result) {
     // wrapper for orm.js that using MySQL query callback will return burger_data, render to index with handlebar
-    res.render("index", { burger_data: burgerData });
+    // when I render the index page from handlebars view, I am passing over the burgerData (switch can be named anything)
+    // and setting the key to burger_data
+    res.render("index", { burger_data: result });
   });
 });
 
-router.post("/create", function(req, res) {
+// post route -> back to index
+router.post('/create', function(req, res) {
   // takes the request object using it as input for buger.addBurger
   burger.insertOne(req.body.burger_name, function(result) {
     // wrapper for orm.js that using MySQL insert callback will return a log to console,
     // render back to index with handle
-    console.log(result);
     res.redirect("/");
   });
 });
 
-router.put("/update", function(req, res) {
-  burger.update(req.body.burger_id, function(result) {
-    // wrapper for orm.js that using MySQL update callback will return a log to console,
-    // render back to index with handle
-    console.log(result);
-    res.redirect("/");
-  });
-});
+
 
 module.exports = router;
