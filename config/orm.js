@@ -46,6 +46,21 @@ var orm = {
       cb(result);
     });
   },
+
+  updateOne: function(table, burgerId, devoured, cb) {
+    var queryString = 'UPDATE ' + table + ' SET ' + 'devoured= ' + devoured + ' WHERE ' 
+    + 'id=' + burgerId; 
+    
+    console.log(queryString);
+
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  },
+
 };
 
 // exports the variable orm only

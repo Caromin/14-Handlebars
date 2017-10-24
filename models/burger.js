@@ -18,11 +18,19 @@ var burger = {
       cb(res);
     });
 	},
+
 	insertOne:  function(burgerNameCreated, cbisfunctionPassedfromControllers) {
     orm.insertOne("burgers", 
       [ "burger_name", "devoured" ], 
-      [ burgerNameCreated, false ], cbisfunctionPassedfromControllers);
+      [ burgerNameCreated, false ], cbisfunctionPassedfromControllers
+    )
 	},
+
+  updateOne: function(burgerId, cb) {
+    orm.updateOne('burgers', burgerId, true, cb
+    )
+  
+  },
 
 };  
 

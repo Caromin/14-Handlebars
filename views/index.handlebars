@@ -21,9 +21,23 @@
         {{#each burger_data}}
         {{!-- unless = if returns a false value --}}
           {{#unless this.devoured}}
-            <div style='text-align: left;'>
-             <pre>{{this.id}}. {{this.burger_name}}</pre>
+          <div class='row'>
+            <div class='col-6' style='text-align: left;'>
+              {{this.id}}. {{this.burger_name}}</pre>
             </div>
+            <div class='col-3'> 
+                <form method='POST' action='/update?_method=PUT'>
+                  <input input type="hidden" type="text" name="burger_id" value={{this.id}}>
+                <button type="submit" id='{{this.id}}' class=" test btn btn-default">Devour it!</button>
+              </form>
+            </div>
+            <div class='col-3'> 
+                <form method='POST' action='/update?_method=DELETE'>
+                  <input input type="hidden" type="text" name="burger_id" value={{this.id}}>
+                <button type="submit" id='{{this.id}}' class=" test btn btn-default">Delete</button>
+              </form>
+            </div>
+          </div>
           {{/unless}}
         {{/each}}
     </div>
@@ -55,6 +69,13 @@
 </div>
 
 <style>
+  pre {
+    width: 80%;
+  }
+  .test {
+    font-size: 14px;
+    color: red;
+  }
   #submitRow {
     margin-top: 10px;
     padding-top: 10px;
@@ -62,5 +83,11 @@
     justify-content: center;
     align-content: center;
     color: white;
+  }
+  form {
+    display: inline-block;
+  }
+  .col-3 {
+    padding: 0;
   }
 </style>

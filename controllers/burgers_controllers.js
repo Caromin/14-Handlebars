@@ -24,6 +24,15 @@ router.post('/create', function(req, res) {
   });
 });
 
+router.put('/update', function(req, res) {
+  //the burger_id comes from name='burger_id' from the index.handlebars <input>
+  // console.log(req.body.burger_id);
+  burger.updateOne(req.body.burger_id, function(result) {
+    
+    res.redirect('/');
+  });
+});
+
 
 
 module.exports = router;
