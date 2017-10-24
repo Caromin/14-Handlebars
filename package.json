@@ -5,7 +5,7 @@
     "node": "6.10.3",
     "npm": "3.10.10",
   },
-  "description": "",
+  "description": "burger creator game, using express-handlebars",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
