@@ -2,7 +2,7 @@
 var mysql = require('mysql');
 
 // setting the connection to a variable
-var connection = mysql.createConnection( {
+var connection = mysql.createPool( {
 	connectTimeout: 300000,
 	host: 'us-cdbr-iron-east-05.cleardb.net',
 	user: 'bac4edfa125487',
@@ -12,25 +12,17 @@ var connection = mysql.createConnection( {
 
 //found online to help trouble shoot the server disconnect when using cleardb
 function handleDisconnect() {
-	//The server is either down or restarting
-  connection.connect(function(err) { 
-    if(err) {   
-      console.log('error when connecting to db:', err);
-      //We introduce a delay before attempting to reconnect, to avoid a hot loop and allow asynchronous request in between
-      setTimeout(handleDisconnect, 60000);
-    }                                     
-  });                             
-
-  connection.on('error', function(err) {
-    console.log('db error', err);
-    // Connection to the MySQL server is usually lost due to either server restart, or a connection idle timeout(wait_timeout)
-    if(err.code === 'PROTOCOL_CONNECTION_LOST') {
-      handleDisconnect();
-    } else {
-      throw err; 
-    }
+  pool.getConnection(function(err, connection){
+      if(err) { return; }
+      connection.query( "SELECT 1", function(err, rows) {
+        connection.end();
+        if (err) {
+            console.log("QUERY ERROR: " + err);
+        }
+      });
   });
 }
+
 
 handleDisconnect();
 
