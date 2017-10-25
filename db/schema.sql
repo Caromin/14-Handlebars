@@ -1,5 +1,5 @@
 -- heroku database name preassigned
-CREATE DATABASE heroku_82100a74448265a;
+-- CREATE DATABASE heroku_82100a74448265a;
 
 USE heroku_82100a74448265a;
 
