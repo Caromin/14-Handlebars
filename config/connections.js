@@ -17,19 +17,19 @@ function handleDisconnect() {
     if(err) {   
       console.log('error when connecting to db:', err);
       //We introduce a delay before attempting to reconnect, to avoid a hot loop and allow asynchronous request in between
-      // setTimeout(handleDisconnect, 2000)
+      setTimeout(handleDisconnect, 60000);
     }                                     
   });                             
 
-  // connection.on('error', function(err) {
-  //   console.log('db error', err);
-  //   // Connection to the MySQL server is usually lost due to either server restart, or a connection idle timeout(wait_timeout)
-  //   if(err.code === 'PROTOCOL_CONNECTION_LOST') {
-  //     handleDisconnect();
-  //   } else {
-  //     throw err; 
-  //   }
-  // });
+  connection.on('error', function(err) {
+    console.log('db error', err);
+    // Connection to the MySQL server is usually lost due to either server restart, or a connection idle timeout(wait_timeout)
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') {
+      handleDisconnect();
+    } else {
+      throw err; 
+    }
+  });
 }
 
 handleDisconnect();
