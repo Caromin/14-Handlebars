@@ -2,7 +2,7 @@
 var mysql = require('mysql');
 
 // setting the connection to a variable
-var connection = mysql.createPool( {
+var pool = mysql.createPool( {
 	connectTimeout: 300000,
 	host: 'us-cdbr-iron-east-05.cleardb.net',
 	user: 'bac4edfa125487',
@@ -15,7 +15,7 @@ function handleDisconnect() {
   pool.getConnection(function(err, connection){
       if(err) { return; }
       connection.query( "SELECT 1", function(err, rows) {
-        connection.end();
+        connection.release();
         if (err) {
             console.log("QUERY ERROR: " + err);
         }
@@ -28,4 +28,4 @@ handleDisconnect();
 
 // after running through the whole page, this will export the var connection ONLY, 
 // connect.connect alert only happens because it appears before the module.exports
-module.exports = connection;
+module.exports = pool;
