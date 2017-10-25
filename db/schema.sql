@@ -1,6 +1,7 @@
-CREATE DATABASE burgers_db;
+-- heroku database name preassigned
+CREATE DATABASE heroku_82100a74448265a;
 
-USE burgers_db;
+USE heroku_82100a74448265a;
 
 # If the table already exists, remove it before trying to create the table again
 DROP TABLE IF EXISTS burgers;

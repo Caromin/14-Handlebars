@@ -3,10 +3,10 @@ var mysql = require('mysql');
 
 // setting the connection to a variable
 var connection = mysql.createConnection( {
-	host: 'localhost',
-	user: 'root',
-	password: 'Learning1',
-	database: 'burgers_db'
+	host: 'us-cdbr-iron-east-05.cleardb.net',
+	user: 'bac4edfa125487',
+	password: '68c188c3',
+	database: 'heroku_82100a74448265a'
 });
 
 // connecting to the database and giving a console.log if it connects
